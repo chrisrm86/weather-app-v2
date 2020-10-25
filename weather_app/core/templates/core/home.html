@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+
+	{% load static %}
+	
+	<!--
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="{% static 'core/js/background-gradient.js' %}"></script> 
+	-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}">
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<div id="gradient" />
+
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    <img id="icon" src="https://img.icons8.com/color/30/000000/partly-cloudy-day.png"/> Weather app
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                {{ form.name }}
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-info">
+                                    Add City
+                                </button>
+                            </div>
+                        </div>
+                        {% if message %}
+                            <div class="notification {{ message_class }}">{{ message }}</div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for city_weather in weather_data %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title-city">{{ city_weather.city }}</span>
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.temperature }}° C</span>
+                                        <br> {{ city_weather.description }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media-right">
+                                <a href="{% url 'delete_city' city_weather.city %}">
+                                    <button class="delete"></button>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+		<p>Created by <a href="https:christiandev.herokuapp.com" target="_blank" id='christiandev-link'>Christian</a></p>
+    </footer>
+
+	</div>
+</body>
+
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather app</title>
+
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}">
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="pageContentWrapper">
+
+<section class="bar-title">
+	<div class="container">
+		<h1 class="title">
+			<img id="icon" src="https://img.icons8.com/color/30/000000/partly-cloudy-day.png"/> Weather app
+		</h1>
+	</div>
+</section>
+	<div class="container">
+		<div class="body-content">
+
+		<form method="POST">
+			{% csrf_token %}
+            <div class="field-form">
+                <div class="control is-expanded">
+                	{{ form.name }}
+                </div>
+            <div class="control">
+                <button type="submit" class="button is-info">
+                Add City
+            	</button>
+            </div>
+			
+			<div class="notification {{ message_class }}">{{ message }}</div>
+		</form>
+	
+	</div>
+<section>
+
+	<div class="container">
+		{% for city_weather in weather_data %}
+			<div class="city-box">
+				<figure>
+				</figure>
+				 <div class="content">
+					 <p>
+						 <span class="title">{{ city_weather.city }}</span><br>
+						 <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+						 <br>
+						 <span class="subtitle">{{ city_weather.temperature }}° C</span>
+						 <br>
+						 <p class="description">{{ city_weather.description }}<p>
+					 </p>
+				 </div>
+			</div>
+			<div class="media-right">
+				<a href="{% url 'delete_city' city_weather.city %">
+					<button class="delete"></button>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+
+</section>
+</div>
+</div>
+
+<footer class="footer">
+	<p>Created by <a href="https://www.linkedin.com/in/christian-moran/" id='linkedin'>Christian</a></p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
+-->

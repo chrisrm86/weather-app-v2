@@ -1,0 +1,82 @@
+body{
+    background-color: #000000;
+    padding: 0px;
+    margin: 0px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#gradient
+{
+  width: auto;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
+.hero .is-primary{
+    background-color: #34495E;
+}
+
+.hero-body{
+    /*background-color: #00d1b2;*/
+    background-color: #34495E;
+}
+
+.title{
+    font-size: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.title-city{
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer{
+    background-color: #00d1b2;
+    /*padding:3rem 1.5rem 6rem;*/
+    position: bottom;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height:100px;
+}
+
+.footer p{
+    text-align:center;
+    color: #ffffff;
+    /*font-family: 'Ubuntu', sans-serif;*/
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#christiandev-link{
+    color: #ffffff;
+    font-size:25px;
+    /*font-family: 'Ubuntu', sans-serif;*/
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-decoration: underline;
+}
+
+/*
+.pageContentWrapper{
+    /*margin-bottom:100%;/* Height of footer*/
+      position: relative;
+      min-height: 100vh;
+  }
+*/
